@@ -77,9 +77,9 @@
           alien = _ref1[_j];
           if (alien.isHit(bullet)) {
             alien.explode(this.ctx);
+            this.score += 50;
             deadBullets.push(bullet);
             deadAliens.push(alien);
-            this.score += 50;
           }
         }
       }
@@ -266,12 +266,15 @@
         x: 0,
         y: 1
       };
-      setInterval(function() {
+      this.wiggleTimer = setInterval(function() {
         return _this.velocity.x = Math.random() * 10 - 5;
       }, 300);
     }
 
     Alien.prototype.update = function() {
+      if (this.exploded) {
+        clearInterval(this.wiggleTimer);
+      }
       this.posX += this.velocity.x;
       return this.posY += this.velocity.y;
     };

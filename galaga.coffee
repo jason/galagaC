@@ -40,9 +40,9 @@ class Game
       for alien in @aliens
         if alien.isHit(bullet)
           alien.explode(@ctx)
+          @score += 50
           deadBullets.push(bullet)
           deadAliens.push(alien)
-          @score += 50
     @hero.bullets = _.difference(@hero.bullets, deadBullets)
     setTimeout( =>
       @aliens = _.difference(@aliens, deadAliens)
@@ -160,11 +160,12 @@ class Alien extends Ship
     super(@posX, @posY)
     @image = document.getElementById('xwing')
     @velocity = {x: 0, y: 1}
-    setInterval( =>
+    @wiggleTimer = setInterval( =>
       @velocity.x = Math.random() * 10 - 5
     , 300)
 
   update: ->
+    clearInterval(@wiggleTimer) if @exploded
     @posX += @velocity.x
     @posY += @velocity.y
 
