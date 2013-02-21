@@ -1,3 +1,4 @@
 canvas {
-  background: black;
+  background-image: url('https://store.stardock.com/images/product_gfx/Stars.jpg');
+  background-size: contain;
 }
